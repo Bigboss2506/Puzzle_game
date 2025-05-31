@@ -4,6 +4,10 @@ body {
   margin: 0;
   padding: 20px;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
   background-size: 600% 600%;
   animation: gradientBG 15s ease infinite;
@@ -212,5 +216,8 @@ body {
     font-size: 18px;
   }
 }
-
+#board {
+  margin: 0 auto; /* центрируем */
+  padding-bottom: 60px; /* добавляем снизу пространство */
+}
 
