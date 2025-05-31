@@ -8,10 +8,14 @@ let currentImage = "default";
 let moveSoundEnabled = true;
 let size = 4;
 
+// const images = {
+//   "default": "tiles",
+//   "saitama_genos": "saitama_genos"
+// };
 const images = {
-  "default": "tiles",
-  "saitama_genos": "saitama_genos"
+  "default": "saitama_genos"
 };
+
 
 function shuffle(array) {
   let currentIndex = array.length, randomIndex;
