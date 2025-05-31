@@ -8,7 +8,76 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="gradient1">
-  <h1>Пятнашки</h1>
+  <!-- ИГРА -->
+  <div id="game-screen" class="screen active">
+    <h1>Пятнашки</h1>
+    <div id="timer">00:00</div>
+    <div id="moves">Ходы: 0</div>
+    <div id="controls">
+      <button onclick="init()">Заново</button>
+      <button onclick="undo()">Назад</button>
+      <button id="toggleModeButton" onclick="toggleMode()">Режим: Картинка</button>
+      <button id="musicButton" onclick="toggleMusic()" class="icon-button">
+        <svg id="musicIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </button>
+      <button id="soundButton" onclick="toggleMoveSound()" class="icon-button">
+        <svg id="soundIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+          <line id="cross1" x1="23" y1="9" x2="17" y2="15"></line>
+          <line id="cross2" x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </button>
+      <button onclick="openSettings()">⚙️ Настройки</button> <!-- Добавляем кнопку Настройки -->
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)">
+    </div>
+    <div id="board"></div>
+  </div>
+
+  <!-- НАСТРОЙКИ -->
+  <div id="settings-screen" class="screen">
+    <h2>Настройки</h2>
+    <label for="sizeSelector">Размер поля:</label>
+    <select id="sizeSelector" onchange="changeSize(this.value)">
+      <option value="4">4x4 (Стандарт)</option>
+      <option value="3">3x3 (Новичок)</option>
+    </select>
+
+    <label for="imageSelect">Картинка:</label>
+    <select id="imageSelect">
+      <option value="default">Сайтама и Генос</option>
+    </select>
+
+    <label for="bgSelector">Градиент:</label>
+    <select id="bgSelector" onchange="changeBackground(this.value)">
+      <option value="gradient1">Градиент 1</option>
+      <option value="gradient2">Градиент 2</option>
+      <option value="gradient3">Градиент 3</option>
+    </select>
+
+    <button onclick="backToGame()">Вернуться в игру</button>
+  </div>
+
+  <!-- МОДАЛЬНОЕ ОКНО ПОБЕДЫ + СКРИПТЫ оставляем как есть -->
+  <audio id="bg-music" loop>...</audio>
+  <audio id="move-sound">...</audio>
+  <audio id="win-sound">...</audio>
+  <div id="winModal" class="modal">...</div>
+
+  <script src="script.js"></script>
+  <script>
+    function openSettings() {
+      document.getElementById('game-screen').classList.remove('active');
+      document.getElementById('settings-screen').classList.add('active');
+    }
+
+    function backToGame() {
+      document.getElementById('settings-screen').classList.remove('active');
+      document.getElementById('game-screen').classList.add('active');
+    }
+  </script>
+  <!-- <h1>Пятнашки</h1>
   <div id="timer">00:00</div>
   <div id="moves">Ходы: 0</div>
   <div id="controls">
@@ -39,7 +108,7 @@
     </select> -->
     <select id="imageSelect">
     <option value="default">Сайтама и Генос</option>
-</select>
+</select> -->
 
     <select id="bgSelector" onchange="changeBackground(this.value)">
       <option value="gradient1">Градиент 1</option>
@@ -68,15 +137,6 @@
       <button onclick="restartGame()">Играть снова</button>
     </div>
   </div>
-  <div id="game-screen" class="screen">
-  <!-- Название и Пятнашки -->
-  <!-- Минимум кнопок: Заново, Старт, Назад, Звук, ⚙️ Настройки -->
-</div>
-
-<div id="settings-screen" class="screen hidden">
-  <!-- Все настройки: размер поля, картинки, фон -->
-  <button onclick="backToGame()">Вернуться в игру</button>
-</div>
 
   <script src="script.js"></script>
   <script>
