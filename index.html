@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Пятнашки</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="gradient1">
+  <h1>Пятнашки</h1>
+  <div id="timer">00:00</div>
+  <div id="moves">Ходы: 0</div>
+  <div id="controls">
+    <button onclick="init()">Заново</button>
+    <button onclick="undo()">Назад</button>
+    <button id="toggleModeButton" onclick="toggleMode()">Режим: Картинка</button>
+    <button id="musicButton" onclick="toggleMusic()" class="icon-button">
+      <svg id="musicIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+      </svg>
+    </button>
+    <button id="soundButton" onclick="toggleMoveSound()" class="icon-button">
+      <svg id="soundIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+        <line id="cross1" x1="23" y1="9" x2="17" y2="15"></line>
+        <line id="cross2" x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>
+    </button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)">
+    <select id="sizeSelector" onchange="changeSize(this.value)">
+      <option value="4">4x4 (Стандарт)</option>
+      <option value="3">3x3 (Новичок)</option>
+      <option value="5">5x5 (Профи)</option>
+    </select>
+    <select id="imageSelector" onchange="changeImage(this.value)">
+      <option value="default">Девушка</option>
+      <option value="saitama_genos">Сайтама и Генос</option>
+    </select>
+    <select id="bgSelector" onchange="changeBackground(this.value)">
+      <option value="gradient1">Градиент 1</option>
+      <option value="gradient2">Градиент 2</option>
+      <option value="gradient3">Градиент 3</option>
+    </select>
+  </div>
+  <div id="board"></div>
+
+  <audio id="bg-music" loop>
+    <source src="fon_song.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="move-sound">
+    <source src="move.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="win-sound">
+    <source src="final_trimmed.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="winModal" class="modal">
+    <div class="modal-content">
+      <h2>🎉 Поздравляем!</h2>
+      <p id="winMessage"></p>
+      <button onclick="restartGame()">Играть снова</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function toggleMusic() {
+      const music = document.getElementById('bg-music');
+      const musicIcon = document.getElementById('musicIcon');
+      if (music.paused) {
+        music.play();
+        musicIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+      } else {
+        music.pause();
+        musicIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
+      }
+    }
+
+    function setVolume(value) {
+      const music = document.getElementById('bg-music');
+      music.volume = value;
+    }
+
+    function toggleMoveSound() {
+      moveSoundEnabled = !moveSoundEnabled;
+      const soundIcon = document.getElementById('soundIcon');
+      if (moveSoundEnabled) {
+        soundIcon.innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+      } else {
+        soundIcon.innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"></path>';
+      }
+    }
+
+    function changeBackground(value) {
+      document.body.className = value;
+    }
+
+    function showWinModal() {
+      const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+      const s = String(seconds % 60).padStart(2, "0");
+      document.getElementById('winMessage').innerText = `Вы собрали картинку за ${m}:${s} и ${moves} ходов.`;
+
+      // Сохраняем лучшие результаты
+      const bestTime = localStorage.getItem('bestTime');
+      const bestMoves = localStorage.getItem('bestMoves');
+      if (!bestTime || seconds < parseInt(bestTime)) {
+        localStorage.setItem('bestTime', seconds);
+      }
+      if (!bestMoves || moves < parseInt(bestMoves)) {
+        localStorage.setItem('bestMoves', moves);
+      }
+
+      const bestM = String(Math.floor(localStorage.getItem('bestTime') / 60)).padStart(2, "0");
+      const bestS = String(localStorage.getItem('bestTime') % 60).padStart(2, "0");
+
+      document.getElementById('winMessage').innerHTML += `<br>🥇 Лучший результат: ${bestM}:${bestS} и ${localStorage.getItem('bestMoves')} ходов`;
+
+      document.getElementById('winModal').style.display = 'block';
+      clearInterval(timer);
+      playWinSound();
+    }
+  </script>
+</body>
+</html>
