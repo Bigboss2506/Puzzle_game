@@ -309,6 +309,15 @@ select:focus {
   background: linear-gradient(135deg, #478ed1, #42a5f5);
 }
 
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+
 
 
 

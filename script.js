@@ -185,4 +185,15 @@ function changeSize(value) {
   init();
 }
 
+function openSettings() {
+  document.getElementById('game-screen').classList.remove('active');
+  document.getElementById('settings-screen').classList.add('active');
+}
+
+function backToGame() {
+  document.getElementById('settings-screen').classList.remove('active');
+  document.getElementById('game-screen').classList.add('active');
+}
+
+
 window.onload = init;
