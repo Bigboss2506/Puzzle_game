@@ -3,16 +3,19 @@ body {
   text-align: center;
   margin: 0;
   padding: 20px;
-  height: 100vh;
+  min-height: 100vh; /* вместо height */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* выравнивание вверх */
   align-items: center;
+  overflow-y: auto; /* скролл только по вертикали */
   background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
   background-size: 600% 600%;
   animation: gradientBG 15s ease infinite;
-  /*transform: translateY(-60px); /* Поднимаем на 30 пикселей вверх */
 }
+
+  /*transform: translateY(-60px); /* Поднимаем на 30 пикселей вверх */
+
 
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
@@ -219,6 +222,6 @@ body {
 }
  #board {
   margin: 0 auto; /* центрируем */
-  padding-bottom: 120px; /* добавляем снизу пространство */
+  padding-bottom: 60px; /* добавляем снизу пространство */
 }
  
