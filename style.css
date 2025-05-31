@@ -224,4 +224,49 @@ body {
   margin: 0 auto; /* центрируем */
   padding-bottom: 60px; /* добавляем снизу пространство */
 }
+
+/*Стеклянный эффект (Glassmorphism)
+/* button { 
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  color: white;
+  padding: 12px 18px;
+  font-size: 18px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+} */
+
+button {
+  background: linear-gradient(135deg, #42a5f5, #478ed1);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(66, 165, 245, 0.3);
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #478ed1, #42a5f5);
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  width: 90%;
+  max-width: 300px;
+}
+
  
+
