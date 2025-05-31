@@ -11,7 +11,7 @@ body {
   background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
   background-size: 600% 600%;
   animation: gradientBG 15s ease infinite;
-  transform: translateY(-60px); /* Поднимаем на 30 пикселей вверх */
+  /*transform: translateY(-60px); /* Поднимаем на 30 пикселей вверх */
 }
 
 @keyframes gradientBG {
@@ -217,8 +217,8 @@ body {
     font-size: 18px;
   }
 }
-/* #board {
+ #board {
   margin: 0 auto; /* центрируем */
-/*  padding-bottom: 60px; /* добавляем снизу пространство */
-/*}
+  padding-bottom: 120px; /* добавляем снизу пространство */
+}
  
