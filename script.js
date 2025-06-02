@@ -16,6 +16,23 @@ let size = 4;
 //   "default": "saitama_genos"
 // };
 
+function checkWin() {
+  if (tilesInOrder) { 
+    clearInterval(timerInterval); 
+
+    // Сюда отправку победы
+    const minutes = parseInt(document.getElementById('minutes').innerText);
+    const seconds = parseInt(document.getElementById('seconds').innerText);
+    const totalSeconds = minutes * 60 + seconds;
+
+    Telegram.WebApp.sendData(JSON.stringify({
+      event: 'win',
+      time: totalSeconds  // <-- сюда реальное время!
+    }));
+
+    showWinMessage();  // Показать сообщение о победе
+  }
+}
 
 
 function shuffle(array) {
