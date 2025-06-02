@@ -30,6 +30,12 @@ body {
   margin: 30px auto;
   width: max-content;
 }
+#board {
+  display: grid;
+  grid-gap: 8px;
+  justify-content: center;
+  margin: 30px auto;
+}
 
 .tile {
   display: flex;
@@ -43,12 +49,18 @@ body {
   color: #333;
   cursor: pointer;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
   width: 80px;
   height: 80px;
+  user-select: none;
 }
+
+.empty {
+  background-color: transparent;
+  border: 2px dashed #bbb;
+  box-shadow: none;
+}
+
+
 
 #board.size-3 .tile {
   width: 100px;
@@ -255,6 +267,8 @@ button {
   transition: background 0.3s ease;
 } 
 
+
+
  /* Скругление и Тени
 button {
   background-color: #e0f7fa;
@@ -267,25 +281,68 @@ button {
   transition: transform 0.2s ease, background-color 0.3s ease;
 }  */
 
-button:hover {
-  background-color: #b2ebf2;
-  transform: scale(1.05);
+.small-button {
+  background: linear-gradient(135deg, #42a5f5, #478ed1);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  margin: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.small-button:hover {
+  background: linear-gradient(135deg, #478ed1, #42a5f5);
+  transform: scale(1.1);
+}
+#controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px; /* расстояние между кнопками */
+  margin: 20px 0;
+  flex-wrap: wrap; /* чтобы на мобилке переносились */
+}
+
+button:not(.small-button):hover {
+  background: linear-gradient(135deg, #478ed1, #42a5f5);
+}
+
+button:not(.small-button):active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 
-button:hover {
+/* button:hover {
+  background-color: #b2ebf2;
+  transform: scale(1.05);
+} */
+
+
+/* button:hover {
   background: linear-gradient(135deg, #478ed1, #42a5f5);
 }
 
 button:active {
   transform: scale(0.95);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
+} */
 
-button {
+
+
+button:not(.small-button) {
   width: 90%;
   max-width: 300px;
 }
+
 select {
   background: linear-gradient(135deg, #42a5f5, #478ed1);
   color: #fff;

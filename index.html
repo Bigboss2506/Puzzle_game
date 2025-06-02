@@ -11,41 +11,55 @@
   <h1>Пятнашки</h1>
   <div id="timer">00:00</div>
   <div id="moves">Ходы: 0</div>
-  <div id="controls">
+  <!-- <div id="controls">
     <button onclick="init()">Заново</button>
-    <button onclick="undo()">Назад</button>
-    <button id="toggleModeButton" onclick="toggleMode()">Режим: Картинка</button>
-    <button id="musicButton" onclick="toggleMusic()" class="icon-button">
-      <svg id="musicIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <button onclick="undo()">Назад</button> -->
+  <div id="controls">
+  <button onclick="init()" class="small-button" title="Заново">🔄</button>
+  <button onclick="undo()" class="small-button" title="Назад">↩️</button>
+<!-- </div> -->
+    <!-- <button id="toggleModeButton" onclick="toggleMode()">Режим: Картинка</button> -->
+    <!-- <button id="musicButton" onclick="toggleMusic()" class="icon-button"> -->
+    <button id="musicButton" onclick="toggleMusic()" class="small-button" title="Музыка 🎵">
+  🎵
+</button>
+      <!-- <svg id="musicIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
+      </svg> -->
     </button>
-    <button id="soundButton" onclick="toggleMoveSound()" class="icon-button">
-      <svg id="soundIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- <button id="soundButton" onclick="toggleMoveSoundIcon()" class="icon-button"> -->
+    <button id="soundButton" onclick="toggleMoveSoundIcon()" class="small-button" title="Звук 🔈">
+  🔈
+</button>
+      <!-- <svg id="soundIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
         <line id="cross1" x1="23" y1="9" x2="17" y2="15"></line>
         <line id="cross2" x1="17" y1="9" x2="23" y2="15"></line>
-      </svg>
+      </svg> -->
     </button>
-    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)">
-    <select id="sizeSelector" onchange="changeSize(this.value)">
+    <button onclick="toggleSize()" class="small-button" title="Сменить размер">🔁</button>
+    </div>
+    
+
+    <!-- <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)"> -->
+    <!-- <select id="sizeSelector" onchange="changeSize(this.value)">
       <option value="4">4x4 (Стандарт)</option>
       <option value="3">3x3 (Новичок)</option>
-      <!-- <option value="5">5x5 (Профи)</option> -->
-    </select>
+       <option value="5">5x5 (Профи)</option> 
+    </select> -->
     <!-- <select id="imageSelector" onchange="changeImage(this.value)">
       <option value="default">Девушка</option>
       <option value="saitama_genos">Сайтама и Генос</option>
     </select> -->
-    <select id="imageSelect">
+    <!-- <select id="imageSelect">
     <option value="default">Сайтама и Генос</option>
-</select>
+</select> -->
 
-    <select id="bgSelector" onchange="changeBackground(this.value)">
+    <!-- <select id="bgSelector" onchange="changeBackground(this.value)">
       <option value="gradient1">Градиент 1</option>
       <option value="gradient2">Градиент 2</option>
       <option value="gradient3">Градиент 3</option>
-    </select>
+    </select> -->
   </div>
   <div id="board"></div>
 
@@ -88,7 +102,7 @@
       music.volume = value;
     }
 
-    function toggleMoveSound() {
+    function toggleMoveSoundIcon() {
       moveSoundEnabled = !moveSoundEnabled;
       const soundIcon = document.getElementById('soundIcon');
       if (moveSoundEnabled) {
@@ -101,6 +115,7 @@
     function changeBackground(value) {
       document.body.className = value;
     }
+    
 
     function showWinModal() {
       const m = String(Math.floor(seconds / 60)).padStart(2, "0");

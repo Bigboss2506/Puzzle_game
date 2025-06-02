@@ -3,8 +3,8 @@ let moves = 0;
 let timer;
 let seconds = 0;
 let history = [];
-let mode = "image";
-let currentImage = "default";
+// let mode = "number";
+// let currentImage = "default";
 let moveSoundEnabled = true;
 let size = 4;
 
@@ -12,9 +12,9 @@ let size = 4;
 //   "default": "tiles",
 //   "saitama_genos": "saitama_genos"
 // };
-const images = {
-  "default": "saitama_genos"
-};
+// const images = {
+//   "default": "saitama_genos"
+// };
 
 
 function shuffle(array) {
@@ -49,6 +49,11 @@ function isSolved() {
   }
   return board[size * size - 1] === 0;
 }
+function toggleSize() {
+  size = (size === 4) ? 3 : 4;
+  init();
+}
+
 
 function draw() {
   const boardEl = document.getElementById("board");
@@ -58,24 +63,30 @@ function draw() {
     const div = document.createElement("div");
     div.className = val === 0 ? "tile empty" : "tile";
 
+    // if (val !== 0) {
+    //   if (mode === "image") {
+    //     const img = document.createElement("img");
+    //     img.src = `${images[currentImage]}/${val}.jpg`;
+    //     img.alt = val;
+    //     div.appendChild(img);
+    //   } else {
+    //     div.innerText = val;
+    //   }
+    // }
+
     if (val !== 0) {
-      if (mode === "image") {
-        const img = document.createElement("img");
-        img.src = `${images[currentImage]}/${val}.jpg`;
-        img.alt = val;
-        div.appendChild(img);
-      } else {
-        div.innerText = val;
-      }
-    }
+  div.innerText = val;
+}
+
 
     div.addEventListener("click", () => move(i));
     boardEl.appendChild(div);
   });
 
-  document.querySelector("button[onclick='toggleMode()']").innerText =
-    "Режим: " + (mode === "image" ? "Картинка" : "Цифры");
+  // document.querySelector("button[onclick='toggleMode()']").innerText =
+  //   "Режим: " + (mode === "image" ? "Картинка" : "Цифры");
 }
+
 
 function move(i) {
   const empty = board.indexOf(0);
@@ -97,6 +108,9 @@ function move(i) {
     }
   }
 }
+
+
+
 
 function updateTimer() {
   seconds++;
@@ -135,10 +149,10 @@ function undo() {
   }
 }
 
-function toggleMode() {
-  mode = mode === "image" ? "number" : "image";
-  draw();
-}
+// function toggleMode() {
+//   mode = mode === "image" ? "number" : "image";
+//   draw();
+// }
 
 function showWinModal() {
   const m = String(Math.floor(seconds / 60)).padStart(2, "0");
@@ -175,16 +189,35 @@ function toggleMoveSound() {
   moveSoundEnabled = !moveSoundEnabled;
 }
 
-function changeImage(value) {
-  currentImage = value;
-  init();
-}
+// function changeImage(value) {
+//   currentImage = value;
+//   init();
+// }
 
 function changeSize(value) {
   size = parseInt(value);
   init();
 }
+function draw() {
+  const boardEl = document.getElementById("board");
+  boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  boardEl.innerHTML = "";
+  board.forEach((val, i) => {
+    const div = document.createElement("div");
+    div.className = val === 0 ? "tile empty" : "tile";
+
+    if (val !== 0) {
+      div.innerText = val;
+    }
+
+    div.addEventListener("click", () => move(i));
+    boardEl.appendChild(div);
+  });
+}
+
+
 
 
 
 window.onload = init;
+
