@@ -39,6 +39,22 @@
     </button>
     <button onclick="toggleSize()" class="small-button" title="Сменить размер">🔁</button>
     </div>
+    <div id="top10-container">
+  <h2>🏆 Топ 10 Игроков</h2>
+  <table id="top10-table" border="1" style="width:100%; text-align:center;">
+    <thead>
+      <tr>
+        <th>Место</th>
+        <th>Игрок</th>
+        <th>Победы</th>
+        <th>Лучшее время (сек)</th>
+      </tr>
+    </thead>
+    <tbody id="top10-body">
+      <!-- Сюда будем добавлять строки -->
+    </tbody>
+  </table>
+</div>
     
 
     <!-- <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)"> -->
@@ -142,5 +158,34 @@
       playWinSound();
     }
   </script>
+<script>
+function loadTop10() {
+  fetch('https://tg-puzzle-bot.onrender.com/top10')
+    .then(response => response.json())
+    .then(data => {
+      const top10 = data.top10;
+      const tableBody = document.getElementById('top10-body');
+      tableBody.innerHTML = '';  // Очистить старую таблицу
+
+      top10.forEach((player, index) => {
+        const row = `<tr>
+          <td>${index + 1}</td>
+          <td>${player.username}</td>
+          <td>${player.wins}</td>
+          <td>${player.best_time}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+      });
+    })
+    .catch(error => {
+      console.error('Ошибка загрузки топа 10:', error);
+    });
+}
+
+// Загружаем сразу при старте игры
+document.addEventListener("DOMContentLoaded", loadTop10);
+</script>
+
+
 </body>
 </html>
