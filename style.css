@@ -143,6 +143,41 @@ button:not(.small-button):active {
   }
 }
 
+#winModal {
+  display: none; /* <-- скрываем по умолчанию */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+}
+
+#winModal h2 {
+  margin: 0 0 20px;
+  font-size: 24px;
+}
+
+#winModal button {
+  background: linear-gradient(135deg, #42a5f5, #478ed1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#winModal button:hover {
+  background: linear-gradient(135deg, #478ed1, #42a5f5);
+}
+
+
 
 
 
