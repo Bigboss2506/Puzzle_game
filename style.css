@@ -1,21 +1,19 @@
+/* === Основа для всей страницы === */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
   margin: 0;
   padding: 20px;
-  min-height: 100vh; /* вместо height */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* выравнивание вверх */
+  justify-content: flex-start;
   align-items: center;
-  overflow-y: auto; /* скролл только по вертикали */
+  overflow-y: auto;
   background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
   background-size: 600% 600%;
   animation: gradientBG 15s ease infinite;
 }
-
-  /*transform: translateY(-60px); /* Поднимаем на 30 пикселей вверх */
-
 
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
@@ -23,18 +21,13 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+/* === Игровое поле === */
 #board {
   display: grid;
   gap: 8px;
   justify-content: center;
   margin: 30px auto;
   width: max-content;
-}
-#board {
-  display: grid;
-  grid-gap: 8px;
-  justify-content: center;
-  margin: 30px auto;
 }
 
 .tile {
@@ -60,8 +53,7 @@ body {
   box-shadow: none;
 }
 
-
-
+/* Размеры плиток для разных размеров поля */
 #board.size-3 .tile {
   width: 100px;
   height: 100px;
@@ -79,217 +71,17 @@ body {
   object-fit: cover;
 }
 
-.empty {
-  background-color: transparent;
-  border: 2px dashed #bbb;
-  box-shadow: none;
-}
-
+/* === Контейнер для кнопок === */
 #controls {
-  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
 }
 
-#controls button, #controls select {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-#controls button:hover, #controls select:hover {
-  background-color: rgba(255, 255, 255, 1);
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 30px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 400px;
-  text-align: center;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.modal-content h2 {
-  margin-top: 0;
-  font-size: 24px;
-}
-
-.modal-content button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 8px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content button:hover {
-  background-color: #fff;
-}
-
-/* Для мобильных телефонов (до 768px ширина) */
-@media (max-width: 768px) {
-  #board {
-    gap: 4px;
-  }
-
-  .tile {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5em;
-  }
-
-  #board.size-3 .tile {
-    width: 80px;
-    height: 80px;
-  }
-
-  #board.size-5 .tile {
-    width: 50px;
-    height: 50px;
-  }
-
-  #controls button, #controls select, #volumeSlider {
-    width: 90%;
-    margin: 10px auto;
-    font-size: 18px;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  #timer, #moves {
-    font-size: 18px;
-  }
-}
-
-/* Для очень маленьких экранов (до 480px ширина) */
-@media (max-width: 480px) {
-  .tile {
-    width: 50px;
-    height: 50px;
-    font-size: 1.2em;
-  }
-
-  #board.size-3 .tile {
-    width: 65px;
-    height: 65px;
-  }
-
-  #board.size-5 .tile {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* @media (max-width: 768px) {
-  #board {
-    width: 90vw;
-    height: auto;
-    max-width: 400px;
-    gap: 6px;
-  } */
-
-  .tile {
-    width: 20vw;
-    height: 20vw;
-    font-size: 5vw;
-  }
-
-  #controls button, #controls select, #volumeSlider {
-    width: 90%;
-    margin: 10px auto;
-    font-size: 18px;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  #timer, #moves {
-    font-size: 18px;
-  }
-}
- #board {
-  margin: 0 auto; /* центрируем */
-  padding-bottom: 60px; /* добавляем снизу пространство */
-}
-
-/*Стеклянный эффект (Glassmorphism)
-/* button { 
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 15px;
-  color: white;
-  padding: 12px 18px;
-  font-size: 18px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-} */
-
-/* Градиентные кнопки*/
-button {
-  background: linear-gradient(135deg, #42a5f5, #478ed1);
-  color: #fff;
-  border: none;
-  border-radius: 14px;
-  padding: 14px 24px;
-  font-size: 18px;
-  font-weight: bold;
-  box-shadow: 0 8px 20px rgba(66, 165, 245, 0.3);
-  transition: background 0.3s ease;
-} 
-@media (max-width: 768px) {
-  #controls button:not(.small-button),
-  #controls select,
-  #volumeSlider {
-    width: 90%;
-    margin: 10px auto;
-    font-size: 18px;
-  }
-}
-
-
-
- /* Скругление и Тени
-button {
-  background-color: #e0f7fa;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 20px;
-  margin: 10px 0;
-  font-size: 18px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, background-color 0.3s ease;
-}  */
-
+/* === Маленькие круглые кнопки === */
 .small-button {
   background: linear-gradient(135deg, #42a5f5, #478ed1);
   color: white;
@@ -311,14 +103,32 @@ button {
   background: linear-gradient(135deg, #478ed1, #42a5f5);
   transform: scale(1.1);
 }
-#controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px; /* расстояние между кнопками */
-  margin: 20px 0;
-  flex-wrap: wrap; /* чтобы на мобилке переносились */
+
+/* === Обычные большие кнопки === */
+button:not(.small-button) {
+  background: linear-gradient(135deg, #42a5f5, #478ed1);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(66, 165, 245, 0.3);
+  transition: background 0.3s ease;
+  width: 90%;
+  max-width: 300px;
 }
+
+button:not(.small-button):hover {
+  background: linear-gradient(135deg, #478ed1, #42a5f5);
+}
+
+button:not(.small-button):active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* === Медиазапросы для мобильных === */
 @media (max-width: 400px) {
   #controls {
     flex-wrap: wrap;
@@ -332,74 +142,6 @@ button {
     margin: 4px;
   }
 }
-
-
-button:not(.small-button):hover {
-  background: linear-gradient(135deg, #478ed1, #42a5f5);
-}
-
-button:not(.small-button):active {
-  transform: scale(0.95);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-
-/* button:hover {
-  background-color: #b2ebf2;
-  transform: scale(1.05);
-} */
-
-
-/* button:hover {
-  background: linear-gradient(135deg, #478ed1, #42a5f5);
-}
-
-button:active {
-  transform: scale(0.95);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-} */
-
-
-
-button:not(.small-button) {
-  width: 90%;
-  max-width: 300px;
-}
-
-select {
-  background: linear-gradient(135deg, #42a5f5, #478ed1);
-  color: #fff;
-  border: none;
-  border-radius: 14px;
-  padding: 12px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  box-shadow: 0 8px 20px rgba(66, 165, 245, 0.4);
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 220px; /* фиксированная ширина */
-  cursor: pointer;
-  text-align: center;
-  text-align-last: center;
-}
-
-select:focus {
-  outline: none;
-  background: linear-gradient(135deg, #478ed1, #42a5f5);
-}
-
-.screen {
-  display: none;
-}
-
-.screen.active {
-  display: block;
-}
-
-
-
-
 
 
 
