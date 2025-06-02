@@ -35,6 +35,7 @@ function checkWin() {
 }
 
 
+
 function shuffle(array) {
   let currentIndex = array.length, randomIndex;
   while (currentIndex !== 0) {
@@ -130,12 +131,22 @@ function move(i) {
 
 
 
+// function updateTimer() {
+//   seconds++;
+//   const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+//   const s = String(seconds % 60).padStart(2, "0");
+//   document.getElementById("timer").innerText = m + ":" + s;
+// }
+
 function updateTimer() {
   seconds++;
-  const m = String(Math.floor(seconds / 60)).padStart(2, "0");
-  const s = String(seconds % 60).padStart(2, "0");
-  document.getElementById("timer").innerText = m + ":" + s;
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+
+  document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+  document.getElementById('seconds').innerText = String(s).padStart(2, '0');
 }
+
 
 function init() {
   let tiles;
@@ -172,14 +183,30 @@ function undo() {
 //   draw();
 // }
 
+// function showWinModal() {
+//   const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+//   const s = String(seconds % 60).padStart(2, "0");
+//   document.getElementById('winMessage').innerText = `Вы собрали картинку за ${m}:${s} и ${moves} ходов.`;
+//   document.getElementById('winModal').style.display = 'block';
+//   clearInterval(timer);
+//   playWinSound();
+// }
+
 function showWinModal() {
-  const m = String(Math.floor(seconds / 60)).padStart(2, "0");
-  const s = String(seconds % 60).padStart(2, "0");
-  document.getElementById('winMessage').innerText = `Вы собрали картинку за ${m}:${s} и ${moves} ходов.`;
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  document.getElementById('winMessage').innerText = `Вы собрали картинку за ${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")} и ${moves} ходов.`;
   document.getElementById('winModal').style.display = 'block';
   clearInterval(timer);
   playWinSound();
+
+  // ДОБАВЛЯЕМ ОТПРАВКУ ПОБЕДЫ В БОТА
+  Telegram.WebApp.sendData(JSON.stringify({
+    event: 'win',
+    time: seconds  // <-- Общее количество секунд
+  }));
 }
+
 
 function restartGame() {
   document.getElementById('winModal').style.display = 'none';
