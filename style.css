@@ -310,6 +310,20 @@ button {
   margin: 20px 0;
   flex-wrap: wrap; /* чтобы на мобилке переносились */
 }
+@media (max-width: 400px) {
+  #controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .small-button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    margin: 4px;
+  }
+}
+
 
 button:not(.small-button):hover {
   background: linear-gradient(135deg, #478ed1, #42a5f5);
