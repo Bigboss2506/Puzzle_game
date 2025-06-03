@@ -262,7 +262,16 @@ function draw() {
 
 
 
+window.onload = function() {
+  if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+    console.log('🟢 Telegram WebApp подключен.');
+    Telegram.WebApp.ready();
+  } else {
+    console.log('🔴 Telegram WebApp НЕ доступен!');
+  }
+  init();  // <-- Потом запускаем твою игру
+}
 
 
-window.onload = init;
+// window.onload = init;
 
